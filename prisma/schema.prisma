@@ -15,6 +15,7 @@ model User {
   createdAt   DateTime     @default(now())
 
   profile     UserProfile?
+  sessions InterviewSession[]
 }
 
 model UserProfile {
@@ -23,6 +24,18 @@ model UserProfile {
   role            String
   experienceLevel String
   updatedAt       DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model InterviewSession {
+  id              String   @id @default(uuid())
+  userId          String
+  role            String
+  experienceLevel String
+  status          String   @default("ONGOING")
+  startedAt       DateTime @default(now())
+  endedAt         DateTime?
 
   user User @relation(fields: [userId], references: [id])
 }
