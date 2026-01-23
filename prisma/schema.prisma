@@ -39,6 +39,7 @@ model InterviewSession {
 
   user User @relation(fields: [userId], references: [id])
   questions SessionQuestion[]
+  responses Response[]
 }
 
 model Question {
@@ -51,6 +52,7 @@ model Question {
   createdAt       DateTime @default(now())
 
   sessionLinks SessionQuestion[]
+  responses Response[]
 }
 
 model SessionQuestion {
@@ -58,6 +60,17 @@ model SessionQuestion {
   sessionId  String
   questionId String
   order      Int
+
+  session  InterviewSession @relation(fields: [sessionId], references: [id])
+  question Question         @relation(fields: [questionId], references: [id])
+}
+
+model Response {
+  id         String   @id @default(uuid())
+  sessionId  String
+  questionId String
+  videoUrl   String
+  createdAt  DateTime @default(now())
 
   session  InterviewSession @relation(fields: [sessionId], references: [id])
   question Question         @relation(fields: [questionId], references: [id])
