@@ -38,4 +38,27 @@ model InterviewSession {
   endedAt         DateTime?
 
   user User @relation(fields: [userId], references: [id])
+  questions SessionQuestion[]
+}
+
+model Question {
+  id              String   @id @default(uuid())
+  role            String
+  experienceLevel String
+  type            String   // technical | behavioral
+  topic           String
+  content         String
+  createdAt       DateTime @default(now())
+
+  sessionLinks SessionQuestion[]
+}
+
+model SessionQuestion {
+  id         String   @id @default(uuid())
+  sessionId  String
+  questionId String
+  order      Int
+
+  session  InterviewSession @relation(fields: [sessionId], references: [id])
+  question Question         @relation(fields: [questionId], references: [id])
 }
