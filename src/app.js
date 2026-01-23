@@ -6,6 +6,8 @@ import interviewRoutes from "./routes/interviewRoutes.js";
 import questionRoutes from "./routes/questionRoutes.js";
 import responseRoutes from "./routes/responseRoutes.js";
 import evaluationRoutes from "./routes/evaluationRoutes.js";
+import analyticsRoutes from "./routes/analyticsRoutes.js";
+
 
 
 const app = express();
@@ -19,6 +21,8 @@ app.use("/api/interview", interviewRoutes);
 app.use("/api/question", questionRoutes);
 app.use("/api/response", responseRoutes);
 app.use("/api/evaluation", evaluationRoutes);
+app.use("/api/analytics", analyticsRoutes);
+
 
 
 
