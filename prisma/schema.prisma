@@ -74,4 +74,20 @@ model Response {
 
   session  InterviewSession @relation(fields: [sessionId], references: [id])
   question Question         @relation(fields: [questionId], references: [id])
+  evaluation Evaluation?
+}
+
+model Evaluation {
+  id             String   @id @default(uuid())
+  responseId     String   @unique
+  correctness    Int
+  completeness   Int
+  clarity        Int
+  communication  Int
+  overallScore   Int
+  feedback       String
+  improvement    String
+  createdAt      DateTime @default(now())
+
+  response Response @relation(fields: [responseId], references: [id])
 }
